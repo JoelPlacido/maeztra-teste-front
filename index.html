@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flickr JSON</title> 
+</head>
+<body>
+        <script>
+           function jsonFlickrApi(rsp) {
+                window.rsp = rsp;
+                var conteudo = "";     
+                
+                for (var i=0; i < rsp.photos.photo.length; i++) {
+                    photo = rsp.photos.photo[i];
+                    t_url = "http://farm" + photo.farm + ".static.flickr.com/" + 
+                        photo.server + "/" + photo.id + "_" + photo.secret + "_" + "t.jpg";
+                    p_url = "http://www.flickr.com/photos/" + photo.owner + "/" + photo.id;
+                    conteudo +=  '<a href="' + p_url + '">' + '<img alt="'+ photo.title + 
+                        '"src="' + t_url + '"/>' + '</a>';
+                    }
+                    document.writeln(conteudo);
+                }
+        </script>
+        <script src="http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=3f3a0be49652a2cae653173729b60d1b&tags=cat&per_page=6&format=json"></script>
+
+</body>
+    
+</html>
